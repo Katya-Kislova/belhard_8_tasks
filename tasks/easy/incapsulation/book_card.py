@@ -15,3 +15,55 @@
 from datetime import date
 
 CURRENT_YEAR = date.today().year
+
+
+class BookCard:
+    _author: str
+    _title: str
+    _year: int
+
+    def __init__(self, author, title, year):
+        self._author = author
+        self._title = title
+        self._year = year
+
+    def __eq__(self, other):
+        return self._year == self._year
+
+    def __lt__(self, other):
+        return self._year < self._year
+
+    @property
+    def author(self):
+        return self._author
+
+    @author.setter
+    def author(self, author):
+        if not isinstance(author, str):
+            raise ValueError
+        else:
+            self._author = author
+
+    @property
+    def title(self):
+        return self._title
+
+    @title.setter
+    def title(self, title):
+        if not isinstance(title, str):
+            raise ValueError
+        else:
+            self._title = title
+
+    @property
+    def year(self):
+        return self._year
+
+    @year.setter
+    def year(self, year):
+        if not isinstance(year, int):
+            raise ValueError
+        elif year < 0 or year >= 2022:
+            raise ValueError
+        else:
+            self._year = year
