@@ -33,6 +33,9 @@ class BookCard:
     def __lt__(self, other):
         return self._year < self._year
 
+    def __repr__(self):
+        return f'{self.author}, "{self.title}", {self.year}.\n'
+
     @property
     def author(self):
         return self._author
@@ -67,3 +70,13 @@ class BookCard:
             raise ValueError
         else:
             self._year = year
+
+
+if __name__ == '__main__':
+    book_list = [
+        BookCard('Стивен Кинг', 'Сияние', 1977),
+        BookCard('Дэниел Киз', 'Цветы для Элджернона', 1959),
+        BookCard('Дуглас Адамс', 'Автостопом по галактике', 1979)
+    ]
+    print(sorted(book_list))
+# Не понимаю, почему не сортируется и почему некрасиво выводится, с запятой впереди.

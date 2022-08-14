@@ -30,3 +30,9 @@ class GameObject:
     def move(self, delta_x, delta_y):
         self._x += delta_x
         self._y += delta_y
+
+
+if __name__ == '__main__':
+    a = GameObject(10, 12)
+    print(a.move(2, 4))
+# Почему none при выводе? Где-то не так написала что-то?
