@@ -33,3 +33,64 @@
  Вернуть данного воина из метода battle.
 """
 import random
+
+
+class Warrior:
+    name: str
+    health_points: int
+
+    def __init__(self, name):
+        self.name = name
+        self.health_points = 100
+
+    def hit(self, other):
+        if other.health_points <= 0:
+            raise ValueError("Второй воин мертв")
+        else:
+            other.health_points -= 20
+            return f"{self.name} атаковал {other.name}. У {other.name} {other.health_points} HP"
+
+
+class Arena:
+    warriors_list: list
+
+    def __init__(self, warriors):
+        self.warriors = warriors
+
+    def add_warrior(self, warrior):
+        if warrior not in self.warriors:
+            self.warriors.append(warrior)
+            print(f"{warrior.name} участвует в битве")
+        else:
+            raise ValueError("Воин уже на арене")
+
+    def choose_warrior(self):
+        return random.choice(self.warriors)
+
+    def battle(self):
+        if len(self.warriors) < 1:
+            raise ValueError("Количество воинов на арене должно быть больше 1")
+        while True:
+            for i in range(len(self.warriors)):
+                attacking_warrior = random.choice(self.warriors)
+                defensive_warrior = random.choice(self.warriors)
+                if attacking_warrior.name == defensive_warrior.name:
+                    continue
+                else:
+                    Warrior.hit(attacking_warrior, defensive_warrior)
+                if defensive_warrior.health_points <= 0:
+                    self.warriors.remove(defensive_warrior)
+                    print(f"{defensive_warrior.name} пал в битве")
+            if len(self.warriors) == 1:
+                print(f"Победил воин: {self.warriors[0].name}")
+                return self.warriors[0].name
+
+
+if __name__ == '__main__':
+    warrior_1 = Warrior('1')
+    warrior_2 = Warrior('2')
+    warrior_3 = Warrior('3')
+
+    warriors = [warrior_1, warrior_2, warrior_3]
+    arena_1 = Arena(warriors)
+    print(arena_1.battle())
